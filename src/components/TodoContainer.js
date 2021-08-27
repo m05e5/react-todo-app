@@ -10,23 +10,19 @@ import InputTodo from './InputTodo';
 
 class TodoContainer extends React.PureComponent {
   state = {
-    todos: [
-      {
-        id: uuidv4(),
-        title: 'Setup development environment',
-        completed: true,
-      },
-      {
-        id: uuidv4(),
-        title: 'Develop website and add content',
-        completed: false,
-      },
-      {
-        id: uuidv4(),
-        title: 'Deploy to live server',
-        completed: false,
-      },
-    ],
+    todos: [],
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .then((response) => response.json())
+      .then((data) => this.setState({ todos: data }));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      // logic here
+    }
   }
 
   handleChange = (id) => {
@@ -59,6 +55,17 @@ class TodoContainer extends React.PureComponent {
     });
   };
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.title = updatedTitle;
+        }
+        return todo;
+      }),
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -69,6 +76,7 @@ class TodoContainer extends React.PureComponent {
             todos={this.state.todos}
             handleChangeProps={this.handleChange}
             delTodoProps={this.delTodo}
+            setUpdate={this.setUpdate}
           />
         </div>
       </div>
