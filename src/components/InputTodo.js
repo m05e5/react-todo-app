@@ -2,6 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/state-in-constructor */
 import React from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
 
 class InputTodo extends React.PureComponent {
   state = {
@@ -34,7 +35,11 @@ class InputTodo extends React.PureComponent {
     return (
       <form onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Add Todo..." className="input-text" value={this.state.title} onChange={this.onChange} />
-        <button type="submit">Submit</button>
+        <button type="submit" className="input-submit">
+          <FaPlusCircle
+            style={{ color: 'darkcyan', fontSize: '20px', marginTop: '2px' }}
+          />
+        </button>
       </form>
     );
   }

@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
 import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
@@ -40,7 +41,9 @@ const TodoItem = (props) => {
         <span style={completed ? completedStyle : null}>
           {title}
         </span>
-        <button type="button" onClick={() => props.delTodoProps(id)}>Delete</button>
+        <button type="button" onClick={() => props.delTodoProps(id)}>
+          <FaTrash style={{ color: 'orangered', fontSize: '16px' }} />
+        </button>
       </div>
       <input
         type="text"
